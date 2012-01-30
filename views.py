@@ -42,7 +42,7 @@ def home(request):
     try:
         test = request.GET['feed']
         print test
-        return redirect('rss')
+        return redirect('rss', permanent=True)
     except:
         pass    
 
