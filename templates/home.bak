@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load markup %}
+{% block banner %}
+
+{% endblock %}
+
+{% block title %}An Epic Webcomic by Lee Lesie {% endblock %}
+
+{% block content %}
+
+<div class="grid_10">
+    <img src="{{ STATIC_URL }}/img/rigbyposter3.jpg" alt="RiGBY the Barbarian Poster" />
+    <div class="book-toc">{% for book in books %}
+        <h2>Epic Contents</h2>
+            <ul>{% for chapter in book.chapters %}
+                <li><a class="chapter-list" href="{{ chapter.get_absolute_url }}">Chapter {{ forloop.counter }}</a></li>{% endfor %}
+            </ul>{% endfor %}
+    </div>
+</div>
+
+
+<div class="grid_6 front-right">
+    <h2>RiGBY the Barbarian</h2>
+    <h3 class="subtitle">a web comic by Lee Leslie</h3>
+    <p>
+        <a class="nav-link" href="http://www.leelesliecomics.com/">blog</a>
+        <a class="nav-link" href="/rss">feeds</a>
+        <a class="nav-link" href="http://wiki.rigbythebarbarian.com/">wiki</a>
+        <a class="nav-link" href="/about">about</a>
+        <a class="nav-link" href="http://www.etsy.com/shop/LeeL">store</a>
+    </p>
+    <p>
+    Welcome, visitor from universe 3,154! 
+    </p>
+{% if legacy %}
+    <p>Greetings!  You followed kind of an old link to get here, things may look a little different than they used to.  I think you were looking for <a href="{{ legacy|safe }}">this</a></p>
+{% endif %}
+
+{% if welcome_back %}
+<hr>
+    <p>you left off here... <a href="{{ page.get_absolute_url }}" title="">Read on, MacDuff</a></p>
+    <div id="comic-page-homepage">
+        <a href="{{ page.get_absolute_url }}"><img id="current-image" src="{{ page.art.url }}" alt="You left off here" /></a>
+    </div>
+{% endif %}
+<hr>
+    <p><a href="{{ latest.get_absolute_url }}" alt="latest comic">Jump to the latest page</a>
+    <h3>{% if fresh %}<span class="fresh">NEW!</span> - {% endif %}{{ latest.title }}</h3>
+    <h3>{{ latest.published }}</h3>
+    <p>{{ lastest.text|markdown }}</p>
+<hr>
+
+</div>
+
+<div class="clear"></div>
+
+<div class="grid_10 lifter">
+<h3>Write on RiGBY's wall, let us know what you think of the new digs</h3>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'rigbythebarbarian'; // required: replace example with your forum shortname
+
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+     var disqus_identifier = 'wall';
+     var disqus_url = 'http://rigbythebarbarian.com/wall/';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+
+{% endblock %}
+

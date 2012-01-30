@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block title %}Error 404{% endblock %}
+
+
+{% block content %}
+<div>
+    <div class="errorpage">
+    <img src="{{ STATIC_URL }}/img/rigby404.jpg" alt="page cannot be displayed" />
+        <p>Error 404: Resource not found, page cannot be displayed! <a href="/">Home</a></p>
+    </div>
+    
+</div>
+{% endblock %}    
+                

@@ -1,0 +1,23 @@
+{% load markup %}<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <atom:link href="http://rigbythebarbarian.com/rss/" rel="self" type="application/rss+xml" />
+        <title>RiGBY the Barbarian </title>
+        <link>http://rigbythebarbarian.com </link>
+        <description>an epic webcomic by Lee Leslie </description>
+        <language>en-us</language>
+        <copyright>Copyright 2011 Lee Leslie</copyright>
+        <webMaster>rigby@aawsolutions.com (Andrew Willey)</webMaster>
+        <lastBuildDate>{{ lastBuildDate }}</lastBuildDate>
+        <generator>the RiGBYnator</generator>
+        <category>Epic Comics</category>{% for page in pages %}
+
+        <item>
+            <title>{% if page.title %}{{ page.title }}{% else %}Page {{ page.pnumber }}{% endif %}</title>
+            <link>http://rigbythebarbarian.com{{ page.get_absolute_url }}</link>
+            <description>{% spaceless %}{{ page.text|markdown|addslashes }}{% endspaceless %}</description>
+            <pubDate>{{ page.published|date:"D, d M Y H:m:s T" }}</pubDate>
+            <guid>http://rigbythebarbarian.com{{ page.get_absolute_url }}</guid>
+        </item>{% endfor%}
+
+    </channel>
+</rss>

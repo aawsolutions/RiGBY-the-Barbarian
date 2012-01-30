@@ -1,0 +1,12 @@
+# sensitive information
+settings.py
+local_settings.py
+*.log
+*.pot
+*.pyc
+*.py~
+*.pid
+*.sock
+
+static/img
+media/

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block title %}{{ chapter.title  }}{% endblock %}
+
+{% block extra_scripts %}
+{% include "reader.js" %}
+{% endblock %}
+
+{% block social-links %}
+    <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js#appId=194864103899343&amp;xfbml=1"></script>
+    <fb:like id="fb-like" href="http://rigbythebarbarian.com" send="false" layout="button_count" width="450" show_faces="true" font=""></fb:like>
+    <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+    <div id="twitter-button">
+       <a href="http://twitter.com/share" class="twitter-share-button"
+          data-url=""
+          data-via="rigbythebarbarian"
+          data-text="Amateur barbarism at its best"
+          data-related="leeleslie:The man. The myth. The legend"
+          data-count="horizontal">Tweet</a>
+    </div>
+{% endblock %}
+
+{% block leftnav %}    
+<div class="grid_1">
+    <div id="chapter-nav"> 
+        <ul id="page-nav"></ul>
+    </div>    
+</div>
+{% endblock %}
+
+{% block rightnav %}
+
+    <div class="grid_2 controls">
+        <a href="javascript:void(0)"><img id="controls-prev" src="{{ STATIC_URL }}/img/back-arrow.gif" alt="back arrow" /></a>
+        <a href="javascript:void(0)"><img id="controls-next" src="{{ STATIC_URL }}/img/next-arrow.gif" alt="next arrow" /></a>
+    </div>
+
+    <div id="page-info">
+        <h3>Artist</h3>
+        <p id="artist-name"></p>
+
+        <h3>Author</h3>
+        <p id="author-name"></p>
+
+        <h3>Colors</h3>
+        <p id="colorist-name"></p>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<div class="grid_13">
+        <div id="comic-page">
+            <img id="current-image" src="{% for page in pages %}{% if page.current == 1  %}{{ page.art.url }}{% endif %}{% endfor %}" alt="nothing yet" />
+        </div>
+
+    <h2>{{ chapter }} - <span id="chapter-page-label">{{ current_index|add:"1" }}</span></h2>
+    <div class="chapter-links">
+        <h3 class="prev-chapter-link">{% if prev_chapter %}back to <a href="{{ prev_chapter.get_absolute_url }}">{{ prev_chapter }}</a>{% else %}the saga begins {% endif %} | 
+        {% if next_chapter %}on to <a href="{{ next_chapter.get_absolute_url }}" title="{{ next_chapter }}">{{ next_chapter }}</a>{% endif %}</h3>
+    </div>
+    <div id="page-text">
+        {% for page in pages %}{% if page.current == 1  %}{{ page.text|markdown }}{% endif %}{% endfor %}
+    </div>
+<div id="disqus_thread"></div>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+{% endblock %}
+
+
+{% block misc %}
+<div id="prefetching">
+    <img id="prefetch-next" alt="hidden" />
+    <img id="prefetch-prev" alt="hidden" />
+</div>
+{% endblock %}    
+                

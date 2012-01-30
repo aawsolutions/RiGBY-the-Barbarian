@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block banner %}
+
+{% endblock %}
+
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+
+{% block content %}
+
+<div class="grid_10">
+    <img src="{{ STATIC_URL }}/img/rigbyposter3.jpg" alt="RiGBY the Barbarian Poster" />
+</div>
+
+
+
+
+<div class="grid_6 front-right">
+    <h2>RiGBY the Barbarian</h2>
+    <h3 class="subtitle">a web comic by Lee Leslie</h3>
+    <p>
+        <a class="nav-link" href="http://www.leelesliecomics.com/">blog</a>
+        <a class="nav-link" href="/rss">feeds</a>
+        <a class="nav-link" href="http://wiki.rigbythebarbarian.com/">wiki</a>
+        <a class="nav-link" href="/about">about</a>
+    </p>
+    
+    <div class="right-txt">
+        <p>{{ flatpage.content|markdown }}</p>
+    </div>
+<div class="clear"></div>
+
+
+{% endblock %}
+
