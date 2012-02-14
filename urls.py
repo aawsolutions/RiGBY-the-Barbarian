@@ -11,12 +11,16 @@ urlpatterns = patterns('',
     url(r'^reader/', include('comicr.urls')),
     
     url(r'^session/remember/(?P<page_id>\d+)/$', 'rigby.views.remember_page_id', name='session_remember'),
+    url(r'^beta/', 'comicr.views.home2'),
 )
 
 urlpatterns += patterns('comicr.views',
     url(r'^rss/$', 
         view='rss',
         name='rss'),
+    url(r'^toc/$',
+        view='toc',
+        name='toc'),
 )
 
 

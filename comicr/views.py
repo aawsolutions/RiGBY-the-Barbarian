@@ -59,3 +59,15 @@ def rss(request):
         'lastBuildDate': pages[0].published.strftime('%a, %d %b %Y %H:%M:%S GMT'),
     })
 
+def toc(request):
+    pages = s("json", Page.objects.all())
+    return HttpResponse(pages, mimetype="application/json")
+
+def home2(request):
+    return render_to_response('2base.html', {
+        'motd': 'hello world'
+    })
+
+
+
+

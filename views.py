@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponse, render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from datetime import datetime
+from django.core import serializers
 
 from comicr.models import *
 from comicr.defaults import *
@@ -60,3 +61,8 @@ def remember_page_id(request, page_id):
     request.session['my_page_id'] = page_id
     return HttpResponse('[{"success": %s,}]' % page_id, 'application/json')
     
+
+def get_all(request):
+
+    data = serializers.serialize('json', Page.objects.all(), relations=('chapter',))
+    return HttpResponse(data, 'application/json')
